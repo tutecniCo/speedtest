@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="referrer" content="no-referrer" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+    <title>Test de Velocidad de tutecniCo - Para saber siempre a que velocidad navegas!</title>
+
+    <meta content="Test de Velocidad de tutecniCo, para saber siempre a que velocidad navegas." name="description">
+    <meta content="test de velocidad, speedtest, internet, argentina" name="keywords">
+    <meta content="tutecnicom" name="author">
+    <meta content="general" name="rating">
+    <meta content="all" name="robots">
+    <meta content="True" name="HandheldFriendly">
+    <meta content="320" name="MobileOptimized"><!-- Meta tags for cards on social media -->
+    <meta content="Test de Velocidad de tutecniCo" property="og:title">
+    <meta content="Test de Velocidad de tutecniCo - Para saber siempre a que velocidad navegas!" property="og:description">
+    <meta content="website" property="og:type">
+    <meta content="https://tutecni.co" property="og:url">
+    <meta content="https://storage.googleapis.com/tutecnico_images/social_banner_1.jpg" property="og:image">
+    <meta content="es_ES" property="og:locale">
+    <meta content="tutecni.co" property="og:site_name">
+    <meta content="on" name="twitter:widgets:csp">
+    <meta content="summary_large_image" name="twitter:card">
+    <meta content="Test de Velocidad de tutecniCo - Para saber siempre a que velocidad navegas." name="twitter:description">
+    <meta content="Test de Velocidad de tutecniCo" name="twitter:title">
+    <meta content="@tutecnicom" name="twitter:site">
+    <meta content="https://tutecni.co" name="twitter:domain">
+    <meta content="@tutecnicom" name="twitter:creator"><!-- Tags for fav-icon -->
+    <meta content="no" name="apple-mobile-web-app-capable">
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style">
+    <meta content="tutecni.co" name="apple-mobile-web-app-title">
+    <meta content="yes" name="mobile-web-app-capable">
+    <meta content="#12788f" name="theme-color"/>
+    <meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" >
+    <meta content="121399358428291" property="fb:app_id">
+    <meta content="#12788f" name="msapplication-TileColor"/>
+    <meta content="https://storage.googleapis.com/tutecnico_images/social_banner_1.jpg" name="msapplication-square150x150logo"/>
+    <meta content="073AB869E99335023A682143B7F55E49" name="msvalidate.01"/>
+
+    <link href="/favicon.ico" rel="icon" sizes="192x192">
+    <link href="/favicon.ico" rel="icon" type="image/png">
+    <link href="/favicon.ico" rel="apple-touch-icon">
+    <link href="/favicon.ico" rel="shortcut icon" sizes="32x32" type="image/x-icon">
+    <link href="/favicon.ico" rel="icon" sizes="32x32" type="image/x-icon">
+    <link href="/favicon.ico" rel="shortcut icon" sizes="16x16 32x32" type="image/vnd.microsoft.icon">
+
+    <link href="//fonts.googleapis.com/css?family=Special+Elite" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" />
+    <style type="text/css">
+        .st-block {
+            text-align: center;
+        }
+        .st-btn {
+            margin-top: 1rem;
+            /*margin-left: 1.5rem;*/
+        }
+        .st-value>span:empty::before {
+            content: "0.00";
+            color: #636c72;
+        }
+        #st-ip:empty::before {
+            content: "___.___.___.___";
+            color: #636c72;
+        }
+        .title {
+            font-weight: 700;
+            font-size: 30px;
+            color: #333;
+            position: relative;
+            top: 8px;
+        }
+        .block {
+            color: #777;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+            font-size: 0.8rem;
+        }
+        .tutecni-font {
+            font-family: 'Special Elite'
+        }
+    </style>
+</head>
+
+<body class="my-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 mb-3">
+                <p class="h1">
+                    <div style="font-size: 16px;text-align: center;">
+                        <span class="title">
+                            Test de Velocidad
+                        </span><br>
+                        by <a href="https://tutecni.co" class="tutecni-font" target="_blank" style="font-size: 16px;">tutecni.co</a>
+                    </div>
+
+                    <button id="st-start" class="btn btn-outline-primary st-btn" onclick="startTest()">Comenzar</button>
+                    <button id="st-stop" class="btn btn-danger st-btn" onclick="stopTest()" hidden="true">Detener</button>
+                </p>
+                <p class="lead">
+                    Tu IP: <span id="st-ip"></span>
+                </p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3 st-block">
+                <h3>Download</h3>
+                <p class="display-4 st-value"><span id="st-download"></span></p>
+                <p class="lead">Mbit/s</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3 st-block">
+                <h3>Upload</h3>
+                <p class="display-4 st-value"><span id="st-upload"></span></p>
+                <p class="lead">Mbit/s</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3 st-block">
+                <h3>Ping</h3>
+                <p class="display-4 st-value"><span id="st-ping"></span></p>
+                <p class="lead">ms</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3 st-block">
+                <h3>Jitter</h3>
+                <p class="display-4 st-value"><span id="st-jitter"></span></p>
+                <p class="lead">ms</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3 st-block">
+                <h4>Compara los resultados</h4>
+                <p class="block">Si quieres comparar los resultados, también puedes usar <a href="https://fast.com/" target="_blank">fast</a> de <strong>Netflix</strong>.</p>
+            </div>
+            <div class="col-lg-3 col-md-6 mb-3 st-block">
+                <div>
+                    <span class="block">Tu técnico de confianza! Donde quieras. Cuando quieras.</span><br>
+                    <span class="block">© 2017 <a href="https://tutecni.co" class="tutecni-font" target="_blank">tutecni.co</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var worker = null
+        function startTest() {
+            document.getElementById('st-start').hidden = true
+            document.getElementById('st-stop').hidden = false
+            worker = new Worker('speedtest_worker.min.js')
+            var interval = setInterval(function () { worker.postMessage('status') }, 100)
+            worker.onmessage = function (event) {
+                var download = document.getElementById('st-download')
+                var upload = document.getElementById('st-upload')
+                var ping = document.getElementById('st-ping')
+                var jitter = document.getElementById('st-jitter')
+                var ip = document.getElementById('st-ip')
+
+                var data = event.data.split(';')
+                var status = Number(data[0])
+                if (status >= 4) {
+                    clearInterval(interval)
+                    document.getElementById('st-start').hidden = false
+                    document.getElementById('st-stop').hidden = true
+                    w = null
+                }
+                if (status === 5) {
+                    // speedtest cancelled, clear output data
+                    data = []
+                }
+                download.textContent = (status==1&&data[1]==0)?"Starting":data[1]
+                upload.textContent = (status==3&&data[2]==0)?"Starting":data[2]
+                ping.textContent = data[3]
+                ip.textContent = data[4]
+                jitter.textContent = data[5]
+            }
+            worker.postMessage('start')
+        }
+        function stopTest() {
+            if (worker) worker.postMessage('abort')
+        }
+    </script>
+</body>
+</html>
