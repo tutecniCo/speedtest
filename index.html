@@ -177,6 +177,10 @@
         function stopTest() {
             if (worker) worker.postMessage('abort')
         }
+
+        window.onload = function(){
+            startTest();
+        };
     </script>
     <script>
         if (window.location.host !== 'localhost:8000') {
