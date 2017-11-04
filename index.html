@@ -140,24 +140,32 @@
         </div>
     </div>
 
-    <script type="text/javascript">
-        var worker = null
-        function startTest() {
-            document.getElementById('st-start').hidden = true
-            document.getElementById('st-stop').hidden = false
-            worker = new Worker('speedtest_worker.min.js')
-            var interval = setInterval(function () { worker.postMessage('status') }, 100)
-            worker.onmessage = function (event) {
-                var download = document.getElementById('st-download')
-                var upload = document.getElementById('st-upload')
-                var ping = document.getElementById('st-ping')
-                var jitter = document.getElementById('st-jitter')
-                var ip = document.getElementById('st-ip')
+    <script>
+        var SEGMENT_KEY = 'YOUR_KEY';
+        !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
+            analytics.load(SEGMENT_KEY);
+            analytics.page();
+        }}();
 
-                var data = event.data.split(';')
-                var status = Number(data[0])
+    </script>
+    <script type="text/javascript">
+        var worker = null;
+        function startTest() {
+            document.getElementById('st-start').hidden = true;
+            document.getElementById('st-stop').hidden = false;
+            worker = new Worker('speedtest_worker.min.js');
+            var interval = setInterval(function () { worker.postMessage('status') }, 100);
+            worker.onmessage = function (event) {
+                var download = document.getElementById('st-download');
+                var upload = document.getElementById('st-upload');
+                var ping = document.getElementById('st-ping');
+                var jitter = document.getElementById('st-jitter');
+                var ip = document.getElementById('st-ip');
+
+                var data = event.data.split(';');
+                var status = Number(data[0]);
                 if (status >= 4) {
-                    clearInterval(interval)
+                    clearInterval(interval);
                     document.getElementById('st-start').hidden = false
                     document.getElementById('st-stop').hidden = true
                     w = null
@@ -166,14 +174,23 @@
                     // speedtest cancelled, clear output data
                     data = []
                 }
-                download.textContent = (status==1&&data[1]==0)?"Starting":data[1]
-                upload.textContent = (status==3&&data[2]==0)?"Starting":data[2]
-                ping.textContent = data[3]
-                ip.textContent = data[4]
-                jitter.textContent = data[5]
-            }
-            worker.postMessage('start')
+                download.textContent = (status===1&&data[1]===0)?"Starting":data[1];
+                upload.textContent = (status===3&&data[2]===0)?"Starting":data[2];
+                ping.textContent = data[3];
+                ip.textContent = data[4];
+                jitter.textContent = data[5];
+
+                analytics.track("Speed Measurement", {
+                    Download: download.textContent,
+                    Upload: upload.textContent,
+                    Ping: ping.textContent,
+                    IP: ip.textContent,
+                    Jitter: jitter.textContent
+                });
+            };
+            worker.postMessage('start');
         }
+
         function stopTest() {
             if (worker) worker.postMessage('abort')
         }
@@ -181,14 +198,6 @@
         window.onload = function(){
             startTest();
         };
-    </script>
-    <script>
-        if (window.location.host !== 'localhost:8000') {
-            !function(){var analytics=window.analytics=window.analytics||[];if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Segment snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on"];analytics.factory=function(t){return function(){var e=Array.prototype.slice.call(arguments);e.unshift(t);analytics.push(e);return analytics}};for(var t=0;t<analytics.methods.length;t++){var e=analytics.methods[t];analytics[e]=analytics.factory(e)}analytics.load=function(t){var e=document.createElement("script");e.type="text/javascript";e.async=!0;e.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.com/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)};analytics.SNIPPET_VERSION="4.0.0";
-                analytics.load('3r7rjBVLxMVB3HNS0gBzdtnmwlvHPux7');
-                analytics.page();
-            }}();
-        }
     </script>
 </body>
 </html>
